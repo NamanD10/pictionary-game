@@ -36,6 +36,7 @@ export async function createEmptyRoom (socket : Socket, isPrivate : boolean, set
 export async function getRoomFromSocket(socket: Socket) {
   if (!socket) return null;
   const roomId = Array.from(socket.rooms)[1] as string;
+  //socket.rooms is an array of rooms which the socket has joined according to time, the one at zero index is the socket's own id
   if (!roomId) return null;
   const room = await getRedisRoom(roomId);
   return room;
